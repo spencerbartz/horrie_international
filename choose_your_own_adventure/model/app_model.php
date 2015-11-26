@@ -18,7 +18,7 @@
         {
             include("../util/dbconnect.php");
             include("../util/util.php");
-            $sql = "CREATE TABLE IF NOT EXISTS ";
+            $sql = "CREATE TABLE IF NOT EXISTS " . $this.class_name();
         }
         
         public static function find($id)

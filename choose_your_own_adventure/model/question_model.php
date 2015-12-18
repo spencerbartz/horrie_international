@@ -4,22 +4,28 @@
     class QuestionModel extends AppModel
     {
         // constructor
-        public function __construct($id, $dateCreated, $text)
+        public function __construct($dateCreated, $qaPairs)
         {
-            parent::__construct($id, $dateCreated);
-            
-            $this->fields["text"] = $text;
+            parent::__construct($dateCreated);
+            $this->fields["q_and_a"] = serialize($qaPairs);
         }
         
-        public function save()
+        public static function find($id)
         {
-            
+            $res = parent::find($id, QuestionModel::getTableName());
+            $qm = new QuestionModel($res["date_created"], unserialize($res["q_and_a"]));
+                $qm->fields["id"] = $res["id"];
+            return $qm;           
         }
     }
 
-    //Test    
-    $question = new QuestionModel("1", date("Y-m-d H:i:s"), "Sample Question");
+    //Test
+    $qaArray =   Array( "question" => "where would you like to go?" , "answers" => Array("1" => "left", "2" => "right", "3" => "south" ) );
+    $question = new QuestionModel(date("Y-m-d H:i:s"), $qaArray);
+    $question->save();
     $question->printFields();
-    QuestionModel::find(3);
+    
+    $q = QuestionModel::find(15);
+    $q->printFields();
     
 ?>

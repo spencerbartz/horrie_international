@@ -59,8 +59,8 @@ function printNews()
         while($row = $res->fetch_assoc())
         {
             println('<div class="box rounded">');
-            println('<h1>Latest <span class="white">News:</span><span> ' . date('F jS, Y', strtotime($row['dateposted'])) . '</span></h1>');
-            println('<p>' . $row['posttext'] . '</p>');
+            println('<h1 class="news-story-title">Latest News: ' . date('F jS, Y', strtotime($row['dateposted'])) . '</h1>');
+            println('<p class="box-content">' . $row['posttext'] . '</p>');
             println('<p class="post-footer align-right"> <span class="date">Date Posted: ' . $row['dateposted'] . '</span> </p>');
             println('</div>');
         }

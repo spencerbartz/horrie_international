@@ -1,3 +1,4 @@
+<H1>Fle Browser</H1>
         <script type="text/javascript">
         function select_image(url) {
         var CKEditorFuncNum = <?php echo $_GET['CKEditorFuncNum']; ?>;

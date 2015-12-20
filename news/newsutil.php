@@ -6,7 +6,7 @@
     function printNewsLinks()
     {
         include 'dbconnect.php';
-        $res = $mysqli->query("select id, dateposted, substring(posttext, 1, 100) as preview from posts");
+        $res = $mysqli->query("select id, dateposted, substring(posttext, 1, 256) as preview from posts");
 
         if(!$res)
         {
@@ -17,8 +17,10 @@
         {
             while($row = $res->fetch_assoc())
             {
-                echo '<tr class="row-a"><td class="first"><a href="newsadmin.php?postid=' .  $row["id"] . '">' . $row["id"] . '</a></td><td><a href="newsadmin.php?postid=' .  $row["id"] . '">' . $row["dateposted"] . "</a></td><td>" . $row["preview"] . '...</td><td><a href="newsadmin.php?postid='. $row["id"] . '">Edit</a> / <a href="#" onclick="deleteWarning(' . $row["id"] . ');">Delete</a></td></tr>'; 
-            }
+                echo '<tr class="row-a"><td class="first"><a href="newsadmin.php?postid="' .  $row["id"] . '">' . $row["id"] . '</a></td>' .
+                '<td><a href="newsadmin.php?postid=' .  $row["id"] . '">' . $row["dateposted"] . "</a></td>" .
+                "<td>" . $row["preview"] . '...</td><td><a href="newsadmin.php?postid='. $row["id"] . '">Edit</a> / <a href="#" onclick="deleteWarning(' . $row["id"] . ');">Delete</a></td></tr>'; 
+                }
         }
     }
     

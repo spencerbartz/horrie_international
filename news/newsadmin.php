@@ -20,45 +20,37 @@
             <form action="newsadmin.php" method="post" onsubmit="return validateTextAreaInput('posttext');">
                 <div>
                     <textarea id="posttext" class="posttext rounded" name="posttext"><?php newsPostText(); ?></textarea><br />
-                    <script>
+                    <script>        
                         CKEDITOR.replace('posttext', {filebrowserBrowseUrl: 'filebrowser.php', filebrowserUploadUrl: 'fileupload.php'});
                     </script>
                         <input type="hidden" name="postid" value="<?php newsPostId(); ?>" />
-                <div style="text-align:center">
+                <div style="text-align:right">
                 <input type="submit" value="submit" class="newssubmit rounded" />
                 </div>
-
                 </div>
             </form>
+            <div style="text-align:left">
+             <button class="rounded" value="new-news-story" onclick="document.location.href = 'newsadmin.php';">CREATE NEW NEWS STORY</button>
+             </div>
             <div class="rounded">  
             <table>
-                <th class="first">ID</th>
-                <th>Time Stamp</th>
-                <th>Preview</th>
-                <th>Action</th>
-                <tr class="row-a">
-                    <td>N/A</td><td>N/A</td><td><a href="newsadmin.php">CREATE NEW NEWS STORY</a></td><td>N/A</td>
-                </tr>
+                <thead>
+                    <th class="first">ID</th>
+                    <th>Time Stamp</th>
+                    <th>Preview</th>
+                    <th>Action</th>
+                </thead>
                 <?php printNewsLinks(); ?>
             </table>
             </div>
         </p>
         </div>
-    </div>
-
-    <div class="right rounded"> 
-        <h2>Categories :</h2>
-        <?php printCategories(); ?>
-
-
-        <h2>Archives :</h2>
-        <?php printArchives(); ?>
-    </div>
+    </div>  
             
     <div style="clear: both;"> </div>
             
     <div id="footer" class="footer rounded">
-        <img src="img/footerlogo.jpg" />
+        <img src="../img/footerlogo.jpg" />
         <br />
         All rights reserved. &copy; Philipp Hein 2015
     </div>

@@ -423,6 +423,11 @@ function validateTextAreaInput(textAreaId)
     }
 }
 
+function resetForm()
+{
+    el("posttext").innerHTML = "";
+}
+
 function _el(elem)
 {
     return document.getElementById(elem);

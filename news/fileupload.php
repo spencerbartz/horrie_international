@@ -2,7 +2,6 @@
 	$target_path = "uploads/"; 
 	$fileName = $_FILES['upload']['name'];
         $ext = substr($fileName, strlen($fileName) - 3);
-        echo "<script type='text/javascript'>console.log('blah');</script>";
         
 	//We don't want to overwrite files that are already in the hall of fame. If the file name already exists, append the current timestamp to it
 	$fileName = substr($fileName, 0, -4) . "-" . date("YmdGis") . "." . $ext; 
@@ -28,9 +27,8 @@
         $url = "http://localhost/horrieinternational/news/uploads/" . $fileName;
         // Usually you will only assign something here if the file could not be uploaded.
         $message = "File uploaded successfully!";
-    echo "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction($funcNum, '$url', '$message');</script>";
+        echo "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction($funcNum, '$url', '$message');</script>";
     
-
 	// Load the stamp and the photo to apply the watermark to
 	$stamp = imagecreatefrompng('watermark.png');
        
@@ -61,7 +59,6 @@
 	//header('Content-type: image/png');
 	$newFileName = substr($fileName, 0, (strlen ($fileName)) - (strlen (strrchr($fileName,'.'))));
 	
-        //imagescale($im, 500);
         switch($ext)
         {
             case "gif":
@@ -78,5 +75,4 @@
         }
 
         imagedestroy($im);
-        
 ?> 

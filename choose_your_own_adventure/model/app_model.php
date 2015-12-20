@@ -18,13 +18,14 @@
         {
             include("../util/dbconnect.php");
             include("../util/util.php");
+            
             $sql = "CREATE TABLE IF NOT EXISTS " . $this->getTableName() . "(id INT(11) NOT NULL AUTO INCREMENT, last_updated TIMESTAMP, date_created TIMESTAMP)";
             $res = $mysqli->query($sql);
            
             if(!$res) {
                 echo "Could Not Create table for class: " . "blah". " " . $mysqli->error;
                 die();
-            }           
+            } 
         }
         
         public static function find($id, $tableName)   

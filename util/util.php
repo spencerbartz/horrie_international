@@ -123,7 +123,7 @@ function getPathToRootDir($fileName)
     $path = "";
     for($i = count($parts) - 2; $i > 0; $i--)
     {
-        if($parts[$i] === "horrieinternational" || $parts[$i] === "horrieinternationalc")
+        if($parts[$i] === "horrieinternational" || $parts[$i] === "ipg.horrieinternationalc")
             break;
         else 
             $path = "../" . $path;

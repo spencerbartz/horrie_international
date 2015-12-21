@@ -15,7 +15,6 @@
 	    echo "There was an error uploading the file, please try again!"; 
 	}
 	
-        
         // Required: anonymous function reference number as explained above.
         $funcNum = $_GET['CKEditorFuncNum'] ;
         // Optional: instance name (might be used to load a specific configuration file or anything else).
@@ -24,10 +23,25 @@
         $langCode = $_GET['langCode'] ;
     
         // Check the $_FILES array and save the file. Assign the correct path to a variable ($url).
-        $url = "http://localhost/horrieinternational/news/uploads/" . $fileName;
+        $url = "http://horrieinternational.com/news/uploads/" . $fileName;
         // Usually you will only assign something here if the file could not be uploaded.
         $message = "File uploaded successfully!";
         echo "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction($funcNum, '$url', '$message');</script>";
+    
+        list($width, $height, $type, $attr) = getimagesize("uploads/" . $fileName);
+
+        if($width > 450)
+        {
+            include("../util/image_resize.php");
+            $height = $height > 450 ? 450 : $height;
+            
+            // Resize image
+            $imgResizer = new ImageResize("uploads/" . $fileName);
+ 
+            // options: exact, portrait, landscape, auto, crop)
+            $imgResizer->resizeImage(450, $height, "landscape");
+            $imgResizer->saveImage("uploads/" . $fileName, 100);
+        }
     
 	// Load the stamp and the photo to apply the watermark to
 	$stamp = imagecreatefrompng('watermark.png');
@@ -38,6 +52,7 @@
             case "gif":
                 $im = imagecreatefromgif("uploads/" . $fileName);
                 break;
+            case "jpeg":
             case "jpg":
                 $im = imagecreatefromjpeg("uploads/" . $fileName);
                 break;
@@ -58,12 +73,13 @@
 	// Output and free memory
 	//header('Content-type: image/png');
 	$newFileName = substr($fileName, 0, (strlen ($fileName)) - (strlen (strrchr($fileName,'.'))));
-	
+        
         switch($ext)
         {
             case "gif":
                 imagegif($im, 'uploads/' . $newFileName . '.gif');
                 break;
+            case "jpeg":
             case "jpg":
                 imagejpeg($im, 'uploads/' . $newFileName . '.jpg');
                 break;

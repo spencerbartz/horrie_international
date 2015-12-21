@@ -13,25 +13,27 @@
         <div class="box rounded">
             <?php processParams(); ?>
             <h1><?php println('Welcome to <span class="white">News Admin</span>'); ?></h1>
+            <br/>
+            <div style="text-align:left">
+                <button class="rounded" value="new-news-story" onclick="document.location.href = 'newsadmin.php';">CREATE NEW NEWS STORY</button>
+            </div>
+           <br/>
             <?php currentlyEditing(); ?>
             <?php deletePost(); ?>
-            <p>
+            <p>  
             <script src="../ckeditor/ckeditor.js"></script>
             <form action="newsadmin.php" method="post" onsubmit="return validateTextAreaInput('posttext');">
                 <div>
                     <textarea id="posttext" class="posttext rounded" name="posttext"><?php newsPostText(); ?></textarea><br />
-                    <script>        
+                    <script>
                         CKEDITOR.replace('posttext', {filebrowserBrowseUrl: 'filebrowser.php', filebrowserUploadUrl: 'fileupload.php'});
                     </script>
                         <input type="hidden" name="postid" value="<?php newsPostId(); ?>" />
-                <div style="text-align:right">
+                <div style="text-align:left">
                 <input type="submit" value="submit" class="newssubmit rounded" />
                 </div>
                 </div>
             </form>
-            <div style="text-align:left">
-             <button class="rounded" value="new-news-story" onclick="document.location.href = 'newsadmin.php';">CREATE NEW NEWS STORY</button>
-             </div>
             <div class="rounded">  
             <table>
                 <thead>

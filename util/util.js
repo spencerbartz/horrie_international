@@ -1,6 +1,6 @@
 /*************************util.js*************************
 *
-Javascript utility functions for spencerbartz.com
+Javascript utility functions for horrieinternational.com
 *
 *************************util.js*************************/
 
@@ -414,6 +414,7 @@ function validateTextAreaInput(textAreaId)
     if(CKEDITOR.instances.posttext.getData().length > 0)
     {
         //validate html tags etc
+        alert("Creating new news story!");
         return true;
     }
     else

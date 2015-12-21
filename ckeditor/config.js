@@ -38,4 +38,9 @@ CKEDITOR.editorConfig = function( config ) {
         
 	config.uiColor = '#F7B42C';
 	config.toolbarCanCollapse = true;
+        
+        config.format_h1 = { element: 'h1', attributes: { 'class': 'news-heading' } };
+        config.format_h2 = { element: 'h2', attributes: { 'class': 'news-heading' } };
+        config.format_h3 = { element: 'h3', attributes: { 'class': 'news-heading' } };
+
 };

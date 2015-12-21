@@ -1,4 +1,4 @@
-<H1>Fle Browser</H1>
+<H1>File Browser</H1>
         <script type="text/javascript">
         function select_image(url) {
         var CKEditorFuncNum = <?php echo $_GET['CKEditorFuncNum']; ?>;
@@ -25,7 +25,7 @@
     
     foreach($files as $file)
     {
-        $url = "http://localhost/horrieinternational/news/uploads/" . $file;
+        $url = "http://horrieinternational.com/news/uploads/" . $file;
 ?>
         <a href="javascript:select_image('<?php echo $url; ?>');"><img style="display:inline" height="50" width="50" src="<?php echo $url; ?>"/></a>
 <?php

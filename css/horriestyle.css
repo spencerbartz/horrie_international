@@ -37,6 +37,11 @@ img
     border: none; 
 }
 
+.news-heading
+{
+    margin-bottom: 10px;    
+}
+
 a 
 { 
     color: #97C4FF; text-decoration: none;

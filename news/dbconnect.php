@@ -1,11 +1,11 @@
 <?php 
     
-    $db_host = "horrieinternationalc.ipagemysql.com";
-    $db_user = "newsie";
+    $db_host = "";
+    $db_user = "";
     $db_host = "localhost";
     $db_user = "root";
-    $db_pass = "wewewe99";
-    $db_name= "horrie_news_db";
+    $db_pass = "";
+    $db_name= "";
     
     $mysqli = new mysqli($db_host, $db_user, $db_pass, $db_name);
     

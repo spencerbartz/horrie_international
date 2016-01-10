@@ -1,5 +1,4 @@
 <?php 
-    include '../util/util.php';
     include 'util/util.php';
     $siteRootPath = getAppRoot(__FILE__);
     printPageDec($siteRootPath);

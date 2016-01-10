@@ -23,10 +23,12 @@
     }
     
     //Test
+    /*
     $page = new PageModel(date("Y-m-d H:i:s"), "Sample Page Text" . rand(0, 100000) . "blah", 4, "../images/" . rand(0,99999) . "test.png");
     //$page->printFields();
     $page->save();
 
      $pm = PageModel::find(61);
      $pm->printFields();
+     */
 ?>

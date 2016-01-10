@@ -4,29 +4,30 @@
     class PageModel extends AppModel
     {
         // constructor
-        public function __construct($dateCreated, $pageText, $questionId, $img_url)
+        public function __construct($pageText, $questionId, $img_url, $date_created = NULL)
         {
-            parent::__construct($dateCreated);
+            parent::__construct($date_created);
             
-            $this->fields["page_text"] = $pageText;
-            $this->fields["question_id"] = $questionId;
-            $this->fields["image_url"] = $img_url;
+            $this->fields["page_text"] = array($pageText, "TEXT");
+            $this->fields["question_id"] = array($questionId, "INT(11)");
+            $this->fields["image_url"] = array($img_url, "VARCHAR(512)");
+            parent::construct_if_not_exists();
         }
         
         public static function find($id)
         {
-            $res = parent::find($id, PageModel::getTableName());
+            $res = parent::find($id, PageModel::get_table_name());
             $pm = new PageModel($res["date_created"], $res["page_text"], $res["question_id"], $res["image_url"]);
             $pm->fields["id"] = $res["id"];
             return $pm;
         }
     }
     
-    //Test
-    $page = new PageModel(date("Y-m-d H:i:s"), "Sample Page Text" . rand(0, 100000) . "blah", 4, "../images/" . rand(0,99999) . "test.png");
-    //$page->printFields();
+    //Test  
+    $page = new PageModel("Sample Page Text" . rand(0, 100000), 4, "images/test.png");
+    //$page->print_fields();
     $page->save();
 
-     $pm = PageModel::find(61);
-     $pm->printFields();
+     //$pm = PageModel::find(61);
+     //$pm->print_fields();
 ?>

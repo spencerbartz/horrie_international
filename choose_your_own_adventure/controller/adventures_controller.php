@@ -1,7 +1,6 @@
 <?php
-    include("abstract_controller.php");
-    
-    class PagesController extends AbstractController
+
+    class StoriesController extends AbstractController
     {
        // constructor
         public function __construct()
@@ -26,24 +25,12 @@
         
         public function new_page_landing()
         {
-            parent::render("../view/pages/page_view.php");
+            parent::render("../view/stories/story_view.php");
         }
         
         public static function to_string()
         {
-            return "pages_controller";
+            return "stories_controller";
         }
-        
-        public function test()
-        {
-            echo "Hello";
-        }
-    }
-    
-    if(isset($_GET["action"]))
-    {
-        $pages_controller = new PagesController();
-        $action = $_GET["action"];
-        $pages_controller->$action();
     }
 ?>

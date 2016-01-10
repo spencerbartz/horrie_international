@@ -1,13 +1,9 @@
-<?php 
-    include '../util/util.php';
-    include 'util/util.php';
+<?php
+    include "util/util.php";
+    include "controller/pages_controller.php";
     $siteRootPath = getAppRoot(__FILE__);
     printPageDec($siteRootPath);
 ?>
-
-<link href="http://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet" />
-<link href="css/default.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/fonts.css" rel="stylesheet" type="text/css" media="all" />
 
 <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
 

@@ -1,6 +1,4 @@
 <?php
-    include('controller/pages_controller.php');
-
     class Router 
     {
         public function __construct()

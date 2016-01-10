@@ -4,10 +4,10 @@
     class QuestionModel extends AppModel
     {
         // constructor
-        public function __construct($dateCreated, $qaPairs)
+        public function __construct($q_and_a_pairs, $date_created)
         {
-            parent::__construct($dateCreated);
-            $this->fields["q_and_a"] = serialize($qaPairs);
+            parent::__construct($date_created);
+            $this->fields["q_and_a"] = serialize($q_and_a_pairs);
         }
         
         public static function find($id)

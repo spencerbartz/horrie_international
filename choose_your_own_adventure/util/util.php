@@ -1,6 +1,6 @@
 <?php
     include("router.php");
-
+    
     function printPageDec($siteRootPath)
     {
         //declare HTML page
@@ -23,7 +23,12 @@
     }
     
     function getAppRoot($fileName)
-    {
+    {   
+        if(ends_with($fileName, "_view.php"))
+        {
+            return "../";
+        }
+        
         $parts = explode("\\", $fileName);
                 
         //Check for file system that uses / instead of \
@@ -36,12 +41,34 @@
         $path = "";
         for($i = count($parts) - 2; $i > 0; $i--)
         {
-            if($parts[$i] === "choose_your_own_adventure")
+            if($parts[$i] == "choose_your_own_adventure")
                 break;
             else 
                 $path = "../" . $path;
         }
         
         return $path;
+    }
+    
+    function println($text, $webmode = FALSE)
+    {
+        if($webmode)
+            echo $text . "<br/>";
+        else
+            echo $text . PHP_EOL;	
+    }
+    
+    //From http://stackoverflow.com/questions/834303/startswith-and-endswith-functions-in-php
+    function starts_with($haystack, $needle)
+    {
+        // search backwards starting from haystack length characters from the end
+        return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== FALSE;
+    }
+    
+    //From http://stackoverflow.com/questions/834303/startswith-and-endswith-functions-in-php
+    function ends_with($haystack, $needle)
+    {
+        // search forward starting from end minus needle length characters
+        return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== FALSE);
     }
 ?>

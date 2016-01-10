@@ -10,7 +10,7 @@
             
             $this->fields["page_text"] = array($page_text, "TEXT");
             $this->fields["question_id"] = array($question_id, "INT(11)");
-            $this->fields["question_id"] = array($adventure_id, "INT(11)");
+            $this->fields["adventure_id"] = array($adventure_id, "INT(11), FOREIGN KEY(adventure_id) REFERENCES adventure_models(id)");
             $this->fields["image_url"] = array($img_url, "VARCHAR(512)");
             parent::construct_if_not_exists();
         }
@@ -27,7 +27,7 @@
     //Test
     function test()
     {
-        $page = new PageModel("Sample Page Text" . rand(0, 100000), 4, "images/test.png");
+        $page = new PageModel("Sample Page Text" . rand(0, 100000), 4, 3, "images/test.png");
         $page->print_fields();
         $page->save();
     
@@ -35,7 +35,7 @@
         $page->save();
         $page->print_fields();            
 
-         $pm = PageModel::find(61);
+         $pm = PageModel::find(3);
          $pm->print_fields();
          
          PageModel::find(999);

@@ -12,9 +12,9 @@
     }
     else
     {
-        $db_host = "horrieinternationalc.ipagemysql.com";
-        $db_user = "chooser";
-        $db_pass = "wewewe99";
+        $db_host = "";
+        $db_user = "";
+        $db_pass = "";
    } 
     $mysqli = new mysqli($db_host, $db_user, $db_pass, $db_name);
     

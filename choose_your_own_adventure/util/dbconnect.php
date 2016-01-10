@@ -6,8 +6,8 @@
     {
         $db_host = "localhost";
         $db_user = "root";
-        $db_pass = "wewewe99";
-        $db_name= "cyoa_db";
+        $db_pass = "";
+        $db_name= "";
         
     }
     else

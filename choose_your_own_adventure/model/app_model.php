@@ -6,13 +6,13 @@
         public $fields;
         public $tableName;
         
-        public function __construct($dateCreated = NULL)
+        public function __construct($date_created = NULL)
         {
             //Initialize fields common to all models
             $this->id = NULL;
-            $dateCreated = $dateCreated ? $dateCreated : date("Y-m-d H:i:s");
-            $this->fields["last_updated"] = array($dateCreated, "TIMESTAMP");
-            $this->fields["date_created"] = array($dateCreated, "TIMESTAMP");    
+            $date_created = $date_created ? $date_created : date("Y-m-d H:i:s");
+            $this->fields["last_updated"] = array($date_created, "TIMESTAMP");
+            $this->fields["date_created"] = array($date_created, "TIMESTAMP");    
             $this->tableName = $this->get_table_name();            
         }
         
@@ -34,17 +34,17 @@
         public static function find($id, $tableName)   
         {
             include("../util/dbconnect.php");
-            $sql = "SELECT * FROM " . $tableName. " where " .  $tableName . " .id = " . $id;
+            $sql = "SELECT * FROM " . $tableName. " WHERE id = " . $id;
             $res = $mysqli->query($sql);
             
             if(!$res)
             {
-                die("Could Not find Object for id " . $id . " " . $mysqli->error);
+                die("Could Not find Object for id " . __LINE__ . $id . " " . $mysqli->error);
             }
             else if(isset($res->num_rows) && $res->num_rows == 0)
             {
-                println("Record not found");
-                return;
+                println("Object not found " . __LINE__);
+                return NULL;
             }
             else
             {
@@ -55,8 +55,15 @@
             }   
         }
         
-        //Save contents of fields to database
         public function save()
+        {
+            if(is_null($this->id))
+                $this->_save();
+            else
+                $this->_update();
+        }
+        
+        private function _save()
         {
             include("../util/dbconnect.php");
             $sql = $col_names = $values = "";
@@ -98,6 +105,34 @@
                 $this->id = $row["id"];
         }
         
+        private function _update()
+        {
+            include("../util/dbconnect.php");
+            $sql = $field_list = "";
+          
+            foreach($this->fields as $field => $attr) 
+                $field_list .= $field . " = '" . $mysqli->real_escape_string($attr[0]) . "', ";
+            
+            //cut off final commas and spaces
+            $field_list = substr($field_list, 0, strlen($field_list) - 2);
+            
+            //make mysql query
+            $sql = "UPDATE " . $this->tableName . " SET " . $field_list . " WHERE id = " . $this->id;
+            $res = $mysqli->query($sql);
+            
+            if(!$res)
+            {
+                die("FATAL: Could not update Object: " . $mysqli->error . PHP_EOL);
+            }
+            else if(isset($res->num_rows) && $res->num_rows == 0)
+            {
+                println("Object not found" . __LINE__);
+                return;
+            }
+            
+            println("Object updated");
+        }
+        
         public function delete()
         {
             include("../util/dbconnect.php");
@@ -125,6 +160,11 @@
             else if(isset($res->num_rows) && $res->num_rows != 0)
                 println("Could not delete Object" . __LINE__);
         }
+                
+        public function set($field_name, $val)
+        {
+            $this->fields[$field_name][0] = $val;
+        }
         
         public function print_fields()
         {
@@ -142,4 +182,4 @@
             return strtolower(substr($class, 0, $index)) . "_" . strtolower(substr($class, $index, strlen($class) - $index)) . "s";
         }
     }
-?>
+?> 

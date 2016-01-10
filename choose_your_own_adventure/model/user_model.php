@@ -12,6 +12,7 @@
             $this->fields["password"] =  array(MD5($password), "VARCHAR(512)");
             $this->fields["last_login"] =  array($lastLogin, "TIMESTAMP");
             $this->fields["failed_login_attempts"] =  array($failed_login_attempts, "INT(11)");
+            parent::construct_if_not_exists();
         }
         
         public static function find($id)
@@ -31,12 +32,20 @@
         $user = new UserModel("Not", "Here", "not.here@nowhere.com", "password", date("Y-m-d H:i:s"), 0);
         $user->save();
         $user->print_fields();
+        
+        $user->set("failed_login_attempts", 3);
+        $user->set("first_name", "User");
+        $user->set("last_name", "McUsage");
+        $user->save();
+        $user->print_fields();
         $user->delete();
     
-        $um = UserModel::find(1);
+        $um = UserModel::find(2);
         $um->print_fields();
+        
+        UserModel::find(999);
     }
     
-    if($argv[1])
+    if(isset($argv[1]))
         test();
 ?>

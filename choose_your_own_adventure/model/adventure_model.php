@@ -28,9 +28,13 @@
         $adv = new AdventureModel(date("Y-m-d H:i:s"), "You shouln't see me" . rand(0, 100000), 3);
         $adv->save();
         $adv->print_fields();
+        
+        $adv->set("title", "This is a new title");
+        $adv->save();
+        $adv->print_fields();
         $adv->delete();
     
-         $am = AdventureModel::find(10);
+         $am = AdventureModel::find(3);
          $am->print_fields();
          
          AdventureModel::find(999);

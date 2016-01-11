@@ -3,7 +3,6 @@
 
     class QuestionModel extends AppModel
     {
-        // constructor
         public function __construct($page_id, $q_and_a, $date_created = NULL)
         {
             parent::__construct($date_created);

@@ -3,7 +3,6 @@
     
     class PageModel extends AppModel
     {
-        // constructor
         public function __construct($page_text, $adventure_id, $img_url, $date_created = NULL)
         {
             parent::__construct($date_created);
@@ -42,7 +41,7 @@
     //Test
     function page_model_test($delete)
     {
-        include "adventure_model.php";
+        include_once "adventure_model.php";
         
         $page = new PageModel("Sample Page Text" . rand(0, 100000), AdventureModel::first()->id, "images/test.png");
         $page->save();

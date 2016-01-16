@@ -61,23 +61,61 @@ function printNewsArchives()
     $year = "";
     $month = "";
     
+    
     while($row = $res->fetch_assoc())
     {
-        $year = date("Y",  strtotime($row["dateposted"]));
+        $dateposted = $row["dateposted"];
+        $year = date("Y",  strtotime($dateposted));
         
         if(end($years) !== $year)    
         {
             array_push($years, $year);
-            println($year, true);
+            println("</ul>" . $year  . "<ul>");
         }
 
-        $month = date("F",  strtotime($row["dateposted"]));
-
+        $month = date("F",  strtotime($dateposted));
+        $month_num = date("m",  strtotime($dateposted));
+        
         if(end($months) !== $month)
         {
             array_push($months, $month);
-            println($month, true);  
+            println("<li><a href=\"news/archive_view.php?datetime=" . $dateposted . "&year=" . $year . "&month=" . $month_num . "\">" . $month . "</a></li>");    
+        }   
+    }
+}
+
+function printArchivesForDate($year, $month)
+{
+    include "../news/dbconnect.php";
+    $sql = "SELECT id, posttext, hashtags, dateposted FROM posts WHERE YEAR(dateposted) =" . $year . " AND MONTH(dateposted) = ". $month;
+    echo $sql;
+    $res = $mysqli->query($sql);
+    
+    if(!$res)
+    {
+        println('<div class="box rounded">');
+        println('<span class="white"> Sorry, there was an error. Please try again later.</span>');
+        println("DB ERROR BUDDY " . $mysqli->error);
+        println('</div>');
+        return;
+    }
+    
+    if($res->num_rows > 0)
+    {
+        while($row = $res->fetch_assoc())   
+        {
+            println('<div class="box rounded">');
+            println('<h1 class="news-story-title">Archived News: ' . date('F jS, Y', strtotime($row['dateposted'])) . '</h1>');
+            println('<p class="box-content">' . $row['posttext'] . '</p>');
+            println('<p class="post-footer align-right"> <span class="date">Date Posted: ' . $row['dateposted'] . '</span> </p>');
+            println('</div>');
         }
+    }
+    else
+    {
+        println('<div class="box rounded">');
+        println('<span class="white"> Sorry, there were no posts in this category   . Please try again later.</span>');
+        println('</div>');        
     }
 }
 

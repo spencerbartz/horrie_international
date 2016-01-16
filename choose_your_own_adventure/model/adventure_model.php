@@ -3,7 +3,6 @@
     
     class AdventureModel extends AppModel
     {
-        // constructor
         public function __construct($title, $user_id, $date_created = NULL)
         {
             parent::__construct($date_created);
@@ -23,7 +22,7 @@
         
         public static function first()
         {
-            $row =  parent::first(AdventureModel::get_table_name());
+            $row = parent::first(AdventureModel::get_table_name());
             $am = new AdventureModel($row["title"], $row["user_id"], $row["date_created"]);
             $am->id = $row["id"];
             return $am;
@@ -31,7 +30,7 @@
         
         public static function last()
         {
-            $row =  parent::last(AdventureModel::get_table_name());
+            $row = parent::last(AdventureModel::get_table_name());
             $am = new AdventureModel($row["title"], $row["user_id"], $row["date_created"]);
             $am->id = $row["id"];
             return $am;
@@ -41,7 +40,7 @@
     //Test
     function adventure_model_test($delete)
     {
-        include "user_model.php";
+        include_once "user_model.php";
         $adv = new AdventureModel("Sample Title_" . rand(0, 100000), UserModel::last()->id, date("Y-m-d H:i:s"));
         $adv->save();
         $adv->print_fields();

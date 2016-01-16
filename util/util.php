@@ -5,6 +5,7 @@ function printPageDeclaration($siteRootPath)
     //declare HTML page
     println('<!doctype html>');
     println('<head>');
+    println('<title>Horrie International Enterprises Inc. Ltd.</title>');
     
     //Set the character set to show umlauts
     println('<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1" />');
@@ -18,45 +19,84 @@ function printPageDeclaration($siteRootPath)
     println('<link rel="shortcut icon" href="' . $siteRootPath . 'img/favicon.ico" />');
     
     //JS
-    println('<script type="text/javascript" src="' . $siteRootPath . 'util/jquery-1.11.2.min.js"></script>');
-    println('<script type="text/javascript" src="' . $siteRootPath . 'util/underscore-min.js"></script>');
-    println('<script type="text/javascript" src="' . $siteRootPath . 'util/util.js"></script>');
+    println('<script type="text/javascript" src="' . $siteRootPath . 'util/js/lib/jquery-1.11.2.min.js"></script>');
+    println('<script type="text/javascript" src="' . $siteRootPath . 'util/js/lib/underscore-min.js"></script>');
+    println('<script type="text/javascript" src="' . $siteRootPath . 'util/js/jquery_extend.js"></script>');
+    println('<script type="text/javascript" src="' . $siteRootPath . 'util/js/search_text_highlighter.js"></script>');
+    println('<script type="text/javascript" src="' . $siteRootPath . 'util/js/util.js"></script>');
 }
 
 function printHeader($siteRootPath)
 {
-    $header = '<div id="header" class="header rounded">' .
-                '<img src="' . $siteRootPath . 'img/mainlogo.jpg" class="rounded" />' .
-                '<div class="mainheader"><h2>What have you done for us lately?</h2></div>' .
-                '<div class="mainmenu">' .
-                  '<div class="menubutton rounded"><a href="' . $siteRootPath . 'index.php">Home</a></div>' .
-                  '<div class="menubutton rounded"><a href="">Products and Services</a></div>' .
-                  '<div class="menubutton rounded"><a href="">People</a></div>' .
-                   '<div class="menubutton rounded"><a href="">Support</a></div>' .
-                '</div>' .
-              '</div>';
+    println('<div id="header" class="header rounded">' );
+    println('<img src="' . $siteRootPath . 'img/mainlogo.jpg" class="rounded" />');
+    println('<div class="mainheader"><h2>What have you done for us lately?</h2></div>');
+    println('<div class="mainmenu">');
+    println('<div class="menubutton rounded"><a href="' . $siteRootPath . 'index.php">Home</a></div>');
+    println('<div class="menubutton rounded"><a href="">Products and Services</a></div>');
+    println('<div class="menubutton rounded"><a hef="">People</a></div>');
+    println('<div class="menubutton rounded"><a href="">Support</a></div>');
+    println('</div>');
+    println('</div>');
+}
+
+function printNewsArchives()
+{
+    include "news/dbconnect.php";
+    $sql = "SELECT * FROM posts ORDER BY dateposted DESC";
+    $res = $mysqli->query($sql);
     
-    println($header);
+    if(!$res)
+    {
+        die($mysqli->error);
+    }
+    
+    if($res->num_rows == 0)
+    {
+        println("table was empty?!");    
+    }
+ 
+    $years = Array();   
+    $months = Array();
+    $year = "";
+    $month = "";
+    
+    while($row = $res->fetch_assoc())
+    {
+        $year = date("Y",  strtotime($row["dateposted"]));
+        
+        if(end($years) !== $year)    
+        {
+            array_push($years, $year);
+            println($year, true);
+        }
+
+        $month = date("F",  strtotime($row["dateposted"]));
+
+        if(end($months) !== $month)
+        {
+            array_push($months, $month);
+            println($month, true);  
+        }
+    }
 }
 
 function printNews()
 {
-    include 'news/dbconnect.php';
-
-    $sql = "SELECT posttext, hashtags, dateposted FROM posts ORDER BY dateposted DESC";
+    include "news/dbconnect.php";
+    $sql = "SELECT posttext, hashtags, dateposted FROM posts ORDER BY dateposted DESC LIMIT 3";
     
-    if(!$res = $mysqli->query($sql))
+    $res = $mysqli->query($sql);
+    if(!$res)
     {
         println('<div class="box rounded">');
         println('<span class="white"> Sorry, Horrie International news is not available right now. Please try again later.</span>');
-        //LOGGER INFO (" . $mysqli->errno . ") " . $mysqli->error;
         println('</div>');
-        die();
     }
     
     if($res->num_rows > 0)
     {
-        while($row = $res->fetch_assoc())
+        while($row = $res->fetch_assoc())   
         {
             println('<div class="box rounded">');
             println('<h1 class="news-story-title">Latest News: ' . date('F jS, Y', strtotime($row['dateposted'])) . '</h1>');
@@ -86,27 +126,6 @@ function printCategories()
                   '</ul>';
                   
     println($categories);
-}
-
-function printArchives()
-{
-    $archives = '<ul>' .
-                  '<li><a href="#">Januar 2015</a></li>' .
-                  '<li><a href="#">Februar 2015</a></li>' .
-                  '<li><a href="#">März 2015</a></li>' .
-                  '<li><a href="#">April 2015</a></li>' .
-                  '<li><a href="#">Mai 2015</a></li>' .
-                  '<li><a href="#">Juni 2015</a></li>' .
-                  '<li><a href="#">Juli 2015</a></li>' .
-                  '<li><a href="#">August 2015</a></li>' .
-                  '<li></li>' .
-                  '<li><a href="#">September 2014</a></li>' .
-                  '<li><a href="#">Oktober 2014</a></li>' .
-                  '<li><a href="#">November 2014</a></li>' .
-                  '<li><a href="#">Dezember 2014</a></li>' .
-                '</ul>';
-                
-    println($archives);
 }
 
 function getPathToRootDir($fileName)
@@ -140,9 +159,14 @@ function println($text, $webmode = FALSE)
 	echo $text . PHP_EOL;	
 }
 
-function printAlert($msg)
+function alert($msg)
 {
     echo '<script type="text/javascript">alert("' . $msg . '");</script>';
+}
+
+function console_log($msg)
+{
+    echo '<script type="text/javascript">console.log(' . $msg . ');</script>';  
 }
 
 function convertToSnakeCase($string)

@@ -1,1 +1,5 @@
-console.log("hello");
+$(document).ready(function()
+{
+    fx = new FX();
+    fx.wireEvents();
+});

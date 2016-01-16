@@ -249,12 +249,9 @@ textarea:focus {
 /* End News editor elements*/
 
 /* Begin Mailer Elements */
-ul {
-    list-style-type: none;
-}
-
-li {
-    margin: 5px;
+ul, ol { 
+    margin-left: 5px;
+    padding:0;
 }
 
 .mail_form_div {

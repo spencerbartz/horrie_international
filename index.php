@@ -24,6 +24,7 @@
         <?php printCategories(); ?>
     
         <h2>Archives :</h2>
+        <ul>
         <?php printNewsArchives(); ?>
     </div>
         

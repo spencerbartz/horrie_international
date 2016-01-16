@@ -88,7 +88,7 @@ function printArchivesForDate($year, $month)
 {
     include "../news/dbconnect.php";
     $sql = "SELECT id, posttext, hashtags, dateposted FROM posts WHERE YEAR(dateposted) =" . $year . " AND MONTH(dateposted) = ". $month;
-    echo $sql;
+
     $res = $mysqli->query($sql);
     
     if(!$res)

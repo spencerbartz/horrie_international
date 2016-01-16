@@ -1,12 +1,12 @@
 <?php
-    include("abstract_controller.php");
+    include "abstract_controller.php";
     
     class PagesController extends AbstractController
     {
        // constructor
         public function __construct()
         {
-       
+            $page = NULL;
         }
         
         public function create()

@@ -195,15 +195,15 @@
                 if($row = mysqli_fetch_assoc($res))
                     return $row;
                 else
-                    die("An error occurred: " . $mysqli->error);
+                    die("An error occurred: " . $mysqli->error);    
             }                           
         }
         
         public static function last($table_name)
         {
             include "../util/dbconnect.php";
-            
-            //make mysql query
+
+            //make mysql query  
             $sql = "SELECT * FROM " . $table_name . " AS t1, (SELECT MAX(id) AS max_id FROM " . $table_name . ") AS t2 WHERE t1.id = t2.max_id";
             $res = $mysqli->query($sql);
             

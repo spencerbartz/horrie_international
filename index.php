@@ -4,41 +4,29 @@
     printPageDeclaration($siteRootPath);
 ?>
 <div id="wrap">
-
     <?php printHeader($siteRootPath); ?>
-
-    <div class="left rounded"> 
-
-        <h2><a href="#">Welcome To Horrie International!</a></h2>
-
-        <div class="articles">
-            Willkommen! I am Philipp Hein, President and CEO of Horrie International Enterprises. 
-            <br /><br />
-            
-            <img src="img/horrie.gif" class="rounded" />
-            <br /><br />
-            
-            We are here to make your wildest dreams come true!!
-        </div>
-
-        <h2><a href="#">Our Mission</a></h2>
-        <div class="articles">
-            To take the world by the throat and ask it "What have you done for us lately!?"
-        </div>
-        
-        <h2>Breaking News!</h2>
+    <div class="left rounded">     
+        <div class="head-container">
+            <h2><a href="#">Welcome To Horrie International!</a></h2>
+          
+            <div class="row-container">
+                <div class="horrie-head index-row rounded"><img class="rounded" src="img/horrie.gif"/></div>
+                <div class="index-row rounded"><img class="rounded" src="img/mission.gif" /></div>
+                <div class="horrie-head index-row rounded"><img class="rounded" src="img/horrie.gif"/></div>
+            </div>
+        </div>  
+        <div class="box rounded center-text"><h2>Breaking News!</h2></div>
         <?php printNews($siteRootPath); ?>
     </div>
-
+    
     <div class="right rounded"> 
         <h2>Categories :</h2>
         <?php printCategories(); ?>
-
-
+    
         <h2>Archives :</h2>
-        <?php printArchives(); ?>
+        <?php printNewsArchives(); ?>
     </div>
-            
+        
     <div style="clear: both;"> </div>
             
     <div id="footer" class="footer rounded">

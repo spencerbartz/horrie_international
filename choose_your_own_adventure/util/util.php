@@ -19,6 +19,7 @@
         //JS
         println('<script type="text/javascript" src="' . $siteRootPath . 'util/jquery-1.11.2.min.js"></script>');
         println('<script type="text/javascript" src="' . $siteRootPath . 'util/underscore-min.js"></script>');
+        println('<script type="text/javascript" src="' . $siteRootPath . 'util/fx.js"></script>');
         println('<script type="text/javascript" src="' . $siteRootPath . 'util/util.js"></script>');
     }
     

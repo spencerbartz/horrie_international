@@ -133,4 +133,44 @@
     {
         echo $GLOBALS["postid"];
     }
+    
+function printArchiveBar()
+{
+    include "../news/dbconnect.php";
+
+    $sql = "SELECT * FROM posts ORDER BY dateposted DESC";
+    $res = $mysqli->query($sql);
+    
+    if(!$res)
+        die($mysqli->error);
+    
+    if($res->num_rows == 0)
+        println("table was empty?!");    
+ 
+    $years = Array();   
+    $months = Array();
+    $year = "";
+    $month = "";
+    
+    while($row = $res->fetch_assoc())
+    {
+        $dateposted = $row["dateposted"];
+        $year = date("Y",  strtotime($dateposted));
+        
+        if(end($years) !== $year)    
+        {
+            array_push($years, $year);
+            println("</ul>" . $year  . "<ul>");
+        }
+
+        $month = date("F",  strtotime($dateposted));
+        $month_num = date("m",  strtotime($dateposted));
+        
+        if(end($months) !== $month)
+        {
+            array_push($months, $month);
+            println("<li><a href=\"archive_view.php?datetime=" . $dateposted . "&year=" . $year . "&month=" . $month_num . "\">" . $month . "</a></li>");    
+        }   
+    }
+}    
 ?>

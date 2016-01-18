@@ -20,11 +20,11 @@ jQuery.fn.clickSound = function (pathToFile) {
 
 jQuery.fn.slideRight = function ($el) {
         var self = this;
-        self.css("left", parseInt(self.css("left")) + parseInt(self.css("width"))  + 30 + "px");
+        self.animate({ 'left' : parseInt(self.css("left")) + parseInt(self.css("width")) + 30 + "px"}, 1000, function() {});
+        playSound("sound/stonedrag1.mp3");
 }
-
 jQuery.fn.attachSearchBox = function ($el) {
         var self = this;
-        $el.css("left", self.position().left);
-        $el.css("right", self.position().right);
+        $el.css("left", parseInt(self.position().left));
+//        $el.css("right", self.position().right);
 }

@@ -10,7 +10,7 @@
         <div class="head-container">
             <h2><a href="#">Horrie International News Archives</a></h2>
             
-            <div class="box rounded center-text"><h2>Archived news from <?php echo $_REQUEST["datetime"]; ?></h2></div>
+            <div class="box rounded center-text"><h2>Archived news from <?php echo date("F, Y", mktime(0, 0, 0, 0, $_REQUEST["month"], $_REQUEST["year"])); ?></h2></div>
             <div class="archives">
             <?php if(isset($_REQUEST["year"]) && isset($_REQUEST["month"])) {
                     printArchivesForDate($_REQUEST["year"], $_REQUEST["month"]);

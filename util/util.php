@@ -43,24 +43,20 @@ function printHeader($siteRootPath)
 function printNewsArchives()
 {
     include "news/dbconnect.php";
+
     $sql = "SELECT * FROM posts ORDER BY dateposted DESC";
     $res = $mysqli->query($sql);
     
     if(!$res)
-    {
         die($mysqli->error);
-    }
     
     if($res->num_rows == 0)
-    {
         println("table was empty?!");    
-    }
  
     $years = Array();   
     $months = Array();
     $year = "";
     $month = "";
-    
     
     while($row = $res->fetch_assoc())
     {

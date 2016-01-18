@@ -15,5 +15,16 @@ jQuery.fn.mouseOverSound = function(pathToFile) {
 jQuery.fn.clickSound = function (pathToFile) {
         this.click(function() {
             playSound(pathToFile);
-            })
+            });
+}
+
+jQuery.fn.slideRight = function ($el) {
+        var self = this;
+        self.css("left", parseInt(self.css("left")) + parseInt(self.css("width"))  + 30 + "px");
+}
+
+jQuery.fn.attachSearchBox = function ($el) {
+        var self = this;
+        $el.css("left", self.position().left);
+        $el.css("right", self.position().right);
 }

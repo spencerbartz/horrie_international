@@ -76,7 +76,6 @@ function checkFormFields(formToCheck, errorDiv, ignoreList)
 
 function promptDeletePhoto(filename, photoid)
 {
-
     if (confirm("Do you really want to delete this photo?"))
     {
         window.location.assign("deletephoto.php?dbname=" + filename + "&id=" + photoid);
@@ -289,6 +288,13 @@ function _el(elem)
 $(document).ready(function() {
     
     $('.horrie-head').mouseOverSound('sound/horrie.wav');
+    
+    $('#right-bar').attachSearchBox($('#search-box'));
+    
+    $("#search-link").on('click', function() {
+        console.log("clicked search");
+        $('#search-box').slideRight($("#right-bar"));    
+    });
     
     $('#searchform').on('submit', function(e) {
         e.preventDefault();

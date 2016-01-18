@@ -19,13 +19,20 @@
         <?php printNews($siteRootPath); ?>
     </div>
     
-    <div class="right rounded"> 
+    <div id="right-bar" class="right rounded"> 
+        <h2><a id="search-link" href="#">Search</a></h2>
         <h2>Categories :</h2>
         <?php printCategories(); ?>
-    
         <h2>Archives :</h2>
         <ul>
         <?php printNewsArchives(); ?>
+    </div>
+
+    <div id="search-box" class="search-box rounded"> 
+        <h2>Search</h1>
+        <form>
+            <input class="rounded" type="search" placeholder="search horrieinternational.com" />
+        </form>
     </div>
         
     <div style="clear: both;"> </div>

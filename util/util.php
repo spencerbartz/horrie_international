@@ -21,7 +21,7 @@ function printPageDeclaration($siteRootPath)
     //JS
     println('<script type="text/javascript" src="' . $siteRootPath . 'util/js/lib/jquery-1.11.2.min.js"></script>');
     println('<script type="text/javascript" src="' . $siteRootPath . 'util/js/lib/underscore-min.js"></script>');
-    println('<script type="text/javascript" src="' . $siteRootPath . 'util/js/jquery_extend.js"></script>');
+    println('<script type="text/javascript" src="' . $siteRootPath . 'util/js/jquery_extend.js" site_root="' . $siteRootPath . '"></script>');
     println('<script type="text/javascript" src="' . $siteRootPath . 'util/js/search_text_highlighter.js"></script>');
     println('<script type="text/javascript" src="' . $siteRootPath . 'util/js/util.js"></script>');
 }
@@ -36,6 +36,7 @@ function printHeader($siteRootPath)
     println('<div class="menubutton rounded"><a href="">Products and Services</a></div>');
     println('<div class="menubutton rounded"><a hef="">People</a></div>');
     println('<div class="menubutton rounded"><a href="">Support</a></div>');
+    println('<div class="menubutton rounded"><a href="' . $siteRootPath . 'login/login.php">Login / Sign Up!</a></div>');
     println('</div>');
     println('</div>');
 }
@@ -83,7 +84,7 @@ function printNewsArchives()
 function printArchivesForDate($year, $month)
 {
     include "../news/dbconnect.php";
-    $sql = "SELECT id, posttext, hashtags, dateposted FROM posts WHERE YEAR(dateposted) =" . $year . " AND MONTH(dateposted) = ". $month;
+    $sql = "SELECT id, posttext, hashtags, dateposted FROM posts WHERE YEAR(dateposted) =" . $year . " AND MONTH(dateposted) = ". $month . " ORDER BY dateposted DESC";
 
     $res = $mysqli->query($sql);
     
@@ -183,6 +184,13 @@ function getPathToRootDir($fileName)
     }
     
     return $path;
+}
+
+function printFooter($siteRootPath)
+{
+        println('<img src="' . $siteRootPath . 'img/footerlogo.jpg" />');
+        println("", TRUE);
+        println('All rights reserved. &copy; Philipp Hein 2016');
 }
 
 function println($text, $webmode = FALSE)

@@ -8,11 +8,10 @@
     <div class="left rounded">     
         <div class="head-container">
             <h2><a href="#">Welcome To Horrie International!</a></h2>
-          
             <div class="row-container">
-                <div class="horrie-head index-row rounded"><img class="rounded" src="img/horrie.gif"/></div>
+                <div class="horrie-head index-row rounded"><img class="rounded" src="img/horrie.gif"/><br><img src="img/fire.gif"/></div>
                 <div class="index-row rounded"><img class="rounded" src="img/mission.gif" /></div>
-                <div class="horrie-head index-row rounded"><img class="rounded" src="img/horrie.gif"/></div>
+                <div class="horrie-head index-row rounded flip"><img class="rounded" src="img/horrie.gif"/><br><img src="img/fire.gif"/></div>
             </div>
         </div>  
         <div class="box rounded center-text"><h2>Breaking News!</h2></div>
@@ -20,7 +19,7 @@
     </div>
     
     <div id="right-bar" class="right rounded"> 
-        <h2><a id="search-link" href="#">Search</a></h2>
+        <div id="search-link"><h2>Search</h2></div>
         <h2>Categories :</h2>
         <?php printCategories(); ?>
         <h2>Archives :</h2>
@@ -29,7 +28,7 @@
     </div>
 
     <div id="search-box" class="search-box rounded"> 
-        <h2>Search</h1>
+        <h2>Search: COMING SOON!</h2>
         <form>
             <input class="rounded" type="search" placeholder="search horrieinternational.com" />
         </form>
@@ -38,9 +37,7 @@
     <div style="clear: both;"> </div>
             
     <div id="footer" class="footer rounded">
-        <img src="img/footerlogo.jpg" />
-        <br />
-        All rights reserved. &copy; Philipp Hein 2015
+        <?php printFooter($siteRootPath); ?>
     </div>
 </div>
 

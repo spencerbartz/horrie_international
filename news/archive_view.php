@@ -19,21 +19,26 @@
         </div>
     </div>
     
-    <div class="right rounded"> 
+    <div id="right-bar" class="right rounded"> 
+        <div id="search-link"><h2>Search</h2></div>
         <h2>Categories :</h2>
         <?php printCategories(); ?>
-    
         <h2>Archives :</h2>
         <ul>
         <?php printArchiveBar(); ?>
+    </div>
+    
+    <div id="search-box" class="search-box rounded"> 
+        <h2>Search: COMING SOON!</h2>
+        <form>
+            <input class="rounded" type="search" placeholder="search horrieinternational.com" />
+        </form>
     </div>
         
     <div style="clear: both;"> </div>
             
     <div id="footer" class="footer rounded">
-        <img src="img/footerlogo.jpg" />
-        <br />
-        All rights reserved. &copy; Philipp Hein 2016
+        <?php printFooter($siteRootPath); ?>
     </div>
 </div>
 

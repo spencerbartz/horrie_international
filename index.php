@@ -37,9 +37,7 @@
     <div style="clear: both;"> </div>
             
     <div id="footer" class="footer rounded">
-        <img src="img/footerlogo.jpg" />
-        <br />
-        All rights reserved. &copy; Philipp Hein 2015
+        <?php printFooter($siteRootPath); ?>
     </div>
 </div>
 

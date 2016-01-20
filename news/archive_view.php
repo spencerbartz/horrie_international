@@ -38,7 +38,7 @@
     <div style="clear: both;"> </div>
             
     <div id="footer" class="footer rounded">
-        <?php printooter($siteRootPath); ?>
+        <?php printFooter($siteRootPath); ?>
     </div>
 </div>
 

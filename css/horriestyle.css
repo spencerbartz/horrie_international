@@ -183,6 +183,19 @@ th {
     vertical-align: top;
 }
 
+.horrie-head {
+    background: #000;
+}
+
+.flip {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+}
+
 .row-container {
     width: 100%;
     text-align: center;
@@ -197,8 +210,6 @@ th {
 .articles {
     display: inline-block;
 }
-
-
 
 .rounded {
     border-radius: 25px;

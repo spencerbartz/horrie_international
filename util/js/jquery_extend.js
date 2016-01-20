@@ -1,3 +1,10 @@
+var jquery_extend_script = $('script[src*=jquery_extend]'); // or better regexp to get the file name..
+
+var site_root = jquery_extend_script.attr('site_root');   
+if (typeof site_root === "undefined" ) {
+   var site_root = 'horrieinternational/';
+}
+
 // from http://stackoverflow.com/questions/210717/using-jquery-to-center-a-div-on-the-screen
 jQuery.fn.center = function () {
     this.css("position","absolute");
@@ -15,16 +22,15 @@ jQuery.fn.mouseOverSound = function(pathToFile) {
 jQuery.fn.clickSound = function (pathToFile) {
         this.click(function() {
             playSound(pathToFile);
-            });
+        });
 }
 
 jQuery.fn.slideRight = function ($el) {
         var self = this;
         self.animate({ 'left' : parseInt(self.css("left")) + parseInt(self.css("width")) + 30 + "px"}, 1000, function() {});
-        playSound("sound/stonedrag1.mp3");
+        playSound(site_root + "sound/stonedrag1.mp3");
 }
 jQuery.fn.attachSearchBox = function ($el) {
         var self = this;
         $el.css("left", parseInt(self.position().left));
-//        $el.css("right", self.position().right);
 }

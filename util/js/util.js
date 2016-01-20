@@ -292,7 +292,6 @@ $(document).ready(function() {
     $('#right-bar').attachSearchBox($('#search-box'));
     
     $("#search-link").on('click', function() {
-        console.log("clicked search");
         $('#search-box').slideRight($("#right-bar"));    
     });
     

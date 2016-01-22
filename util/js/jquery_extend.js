@@ -25,12 +25,27 @@ jQuery.fn.clickSound = function (pathToFile) {
         });
 }
 
-jQuery.fn.slideRight = function ($el) {
-        var self = this;
-        self.animate({ 'left' : parseInt(self.css("left")) + parseInt(self.css("width")) + 30 + "px"}, 1000, function() {});
+jQuery.fn.fadeSlide = function ($el, direction) {
+        var $self = this;
+       
+        var currentPosition = parseInt($self.css("left"))
+        var slideDistance = direction === "left" ? -$el.outerWidth() : $el.outerWidth();
+        
+        if(direction === "right") {
+            $self.css("display", "block");
+            $self.animate({ opacity: 0 }, 0);
+        }
+        
+        $self.animate({ 'left' :  currentPosition + slideDistance + "px", opacity: direction === "right" ? 1 : 0 }, 1000, function() {});
         playSound(site_root + "sound/stonedrag1.mp3");
 }
 jQuery.fn.attachSearchBox = function ($el) {
-        var self = this;
-        $el.css("left", parseInt(self.position().left));
+        var $self = this;
+        $el.css("left", parseInt($self.position().left));
+}
+
+jQuery.fn.resizeTo = function ($el) {
+    var $self = this;
+    var overhang = 140;
+    $self.css("width", parseInt($el.css("width")) + overhang + "px");
 }

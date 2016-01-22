@@ -19,7 +19,7 @@
     </div>
     
     <div id="right-bar" class="right rounded"> 
-        <div id="search-link"><h2>Search</h2></div>
+        <div id="search-link" class="rounded"><h1>Search</h1></div>
         <h2>Categories :</h2>
         <?php printCategories(); ?>
         <h2>Archives :</h2>
@@ -28,9 +28,10 @@
     </div>
 
     <div id="search-box" class="search-box rounded"> 
-        <h2>Search: COMING SOON!</h2>
+        <h3>Search Horrie International</h3>
         <form>
-            <input class="rounded" type="search" placeholder="search horrieinternational.com" />
+            <input class="search-input rounded block" type="search" placeholder="search horrieinternational.com" />
+            <button class="search-button rounded">Submit</button>
         </form>
     </div>
         

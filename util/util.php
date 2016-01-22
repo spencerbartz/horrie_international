@@ -152,12 +152,12 @@ function printNews()
 function printCategories()
 {
     $categories = '<ul>' .
-                    '<li><a href="#">World Politics</a></li>' .
-                    '<li><a href="#">Europe Sport</a></li>' .
-                    '<li><a href="#">Networking</a></li>' .
-                    '<li><a href="#">Nature - Africa</a></li>' .
-                    '<li><a href="#">SuperCool</a></li>' .
-                    '<li><a href="#">Last Category</a></li>' .
+                    '<li><a href="https://en.wikipedia.org/wiki/Weltpolitik">World Politik</a></li>' .
+                    '<li><a href="https://en.wikipedia.org/wiki/Sport_in_Germany">Sport Europa</a></li>' .
+                    '<li><a href="networking/networking.php">Networking</a></li>' .
+                    '<li><a href="http://www.nature.com/news/specials/africa/index.html">Nature - Africa</a></li>' .
+                    '<li><a href="http://lyricstranslate.com/en/blaue-augen-blue-eyes.html">SuperCool</a></li>' .
+                    '<li><a href="http://www.bmw.com/com/de/">Die coolsten Autos</a></li>' .
                   '</ul>';
                   
     println($categories);

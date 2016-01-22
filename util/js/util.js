@@ -222,7 +222,9 @@ $(document).ready(function() {
     $('#right-bar').attachSearchBox($('#search-box'));
     
     $("#search-link").on('click', function() {
-        $('#search-box').slideRight($("#right-bar"));    
+        console.log("search box: " + Math.round($("#right-bar").position().left) + "px" + " right bar: " + Math.round($("#right-bar").position().left)); 
+        var direction = $('#search-box').css("left") === parseInt($("#right-bar").position().left) + "px" ? "right" : "left";
+        $('#search-box').fadeSlide($("#right-bar"), direction);    
     });
     
     $('#searchform').on('submit', function(e) {
@@ -232,4 +234,10 @@ $(document).ready(function() {
         else
             $('#searchquery').focus();
     });
+});
+
+$(window).resize(function () {
+        $('#search-box').hide();
+        $('#right-bar').attachSearchBox($('#search-box'));
+        $('#search-box').resizeTo($('#right-bar'));
 });

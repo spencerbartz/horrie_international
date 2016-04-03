@@ -16,6 +16,7 @@
             $this->tableName = $this->get_table_name();   
         }
         
+        //TODO: Get this thing working with static
         public function construct_if_not_exists($drop = true)
         {                  
             include "../util/dbconnect.php";
@@ -231,6 +232,11 @@
             foreach($this->fields as $field => $attr)
                 if(isset($this->fields[$field]))
                     println($field . ": " . $attr[0]);
+        }
+        
+        public function get_fields()
+        {
+            return get_object_vars($this);
         }
         
         public static function get_table_name()

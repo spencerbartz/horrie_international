@@ -1,5 +1,7 @@
 <?php
-    include "router.php";
+    include_once "router.php";
+    include_once "print_util.php";
+    include_once "url_util.php";
     
     function printPageDec($siteRootPath)
     {
@@ -21,42 +23,32 @@
         println('<script type="text/javascript" src="' . $siteRootPath . 'util/underscore-min.js"></script>');
         println('<script type="text/javascript" src="' . $siteRootPath . 'util/fx.js"></script>');
         println('<script type="text/javascript" src="' . $siteRootPath . 'util/util.js"></script>');
+        
+        //Try to support old ass browsers
+        println('<!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->');
     }
     
-    function getAppRoot($fileName)
-    {   
-        if(ends_with($fileName, "_view.php"))
-        {
-            return "../";
-        }
-        
-        $parts = explode("\\", $fileName);
-                
-        //Check for file system that uses / instead of \
-        if(count($parts) == 1)
-        {
-            $parts = explode("/", $fileName);
-        }
-        
-        //Trick to figure out path to css and js util files.
-        $path = "";
-        for($i = count($parts) - 2; $i > 0; $i--)
-        {
-            if($parts[$i] == "choose_your_own_adventure")
-                break;
-            else 
-                $path = "../" . $path;
-        }
-        
-        return $path;
-    }
-    
-    function println($text, $webmode = FALSE)
+    function printAppMenu()
     {
-        if($webmode)
-            echo $text . "<br/>";
-        else
-            echo $text . PHP_EOL;	
+        include_once "../controller/users_controller.php";
+        println('<div id="menu">');
+        println('<ul>');
+        println('<li class="active"><a href="#" accesskey="1" title="">Homepage</a></li>');
+        println('<li><a href="#" accesskey="2" title="">Sign in</a></li>');
+        println('<li>');
+        Router::link_to(UsersController::to_string() , "new_user_landing", "Create Acount", array(), array("acesskey" => "3")) ;
+        println('</li>');
+        println('<li><a href="#" accesskey="4" title="">About</a></li>');
+        println('<li><a href="#" accesskey="5" title="">Contact Us</a></li>');
+        println('</ul>');
+        println('</div>');
+    }
+    
+    function printCopyright()
+    {
+        println('<div id="copyright" class="container">');
+	println('<p>&copy; 2016 Horrie International. All rights reserved.</p>');
+        println('</div>');
     }
     
     //From http://stackoverflow.com/questions/834303/startswith-and-endswith-functions-in-php

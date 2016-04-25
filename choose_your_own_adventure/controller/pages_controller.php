@@ -1,9 +1,8 @@
 <?php
-    include "abstract_controller.php";
+    include_once  "abstract_controller.php";
     
     class PagesController extends AbstractController
     {
-       // constructor
         public function __construct()
         {
             $page = NULL;
@@ -33,17 +32,7 @@
         {
             return "pages_controller";
         }
-        
-        public function test()
-        {
-            echo "Hello";
-        }
     }
     
-    if(isset($_GET["action"]))
-    {
-        $pages_controller = new PagesController();
-        $action = $_GET["action"];
-        $pages_controller->$action();
-    }
+    PagesController::process_request();
 ?>

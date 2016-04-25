@@ -1,6 +1,7 @@
 <?php
-    include "util/util.php";
-    include_once "controller/welcome_controller.php";
+    include_once "../util/util.php";
+    include_once "pages_controller.php";
+    
     $siteRootPath = getAppRoot(__FILE__);
     printPageDec($siteRootPath);
 ?>
@@ -20,8 +21,7 @@
                 <span class="byline">The possibilities are endless...</span>
         </div>
         <ul class="actions">
-            <li>Redirecting you to our welcome page now ...</li>
-            <meta http-equiv="refresh" content="0;URL=controller/welcome_controller.php?controller=welcome&action=welcome_landing"></li>
+            <li><?php Router::link_to(PagesController::to_string() , "new_page_landing", "Get Started!", array("class" => "button")) ; ?></li>
         </ul>
     </div>
 </div>

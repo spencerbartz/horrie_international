@@ -40,7 +40,7 @@
             
             if(!$res)
             {
-                die("LINE: " . __LINE__ . " Could Not find Object for id " . $id . " " . $mysqli->error . PHP_EOL);
+                die("[" . get_called_class() . "] LINE: " . __LINE__ . " Could Not find Object for id " . $id . " " . $mysqli->error . PHP_EOL);
             }
             else if(isset($res->num_rows) && $res->num_rows == 0)
             {
@@ -57,8 +57,7 @@
         }
         
         public function save()
-        {
-                        
+        {              
             if(is_null($this->id))
                 $this->_save();
             else

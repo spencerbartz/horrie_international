@@ -17,6 +17,7 @@
         
         public static function find($id)
         {
+            //TODO find a way to move this logic up into app_model.php so every model doesn't have all this crap
             $row = parent::find($id, UserModel::get_table_name());
             $um = new UserModel($row["first_name"],
                                 $row["last_name"], $row["email"], $row["password"],

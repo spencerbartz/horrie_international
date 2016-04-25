@@ -17,11 +17,11 @@
             $url_attr_str =  Router::build_url_attr_str($url_attr);
             println('<a href="controller/' . $controller . '.php?action=' . $action . '"'. $url_attr_str . $tag_attr_str . '>' . $link_text . '</a>');
         }
-        
+            
         public static function form_action($controller, $action, $url_attr = array())
         {
             $url_attr_str = Router::build_url_attr_str($url_attr);
-            print($controller . '.php?action=' . $action . "" . $url_attr_str);
+            print('controller/' . $controller . '.php?action=' . $action . '' . $url_attr_str);
         }
         
         private static function build_url_attr_str($url_attr)

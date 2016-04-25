@@ -2,7 +2,7 @@
     include_once "router.php";
     include_once "print_util.php";
     include_once "url_util.php";
-    
+
     function printPageDec($siteRootPath)
     {
         //declare HTML page
@@ -28,9 +28,9 @@
         println('<!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->');
     }
     
-    function printAppMenu()
+    function printAppMenu($siteRootPath)
     {
-        include_once "../controller/users_controller.php";
+        include_once $siteRootPath . "controller/users_controller.php";
         println('<div id="menu">');
         println('<ul>');
         println('<li class="active"><a href="#" accesskey="1" title="">Homepage</a></li>');

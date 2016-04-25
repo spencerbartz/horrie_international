@@ -3,7 +3,6 @@
     
     class UsersController extends AbstractController
     {
-       // constructor
         public function __construct()
         {
             $user = NULL;
@@ -11,7 +10,10 @@
         
         public function create()
         {
+            $user_model;
             
+            if(isset($_POST))
+               print_r($_POST);
         }
         
         public function index()
@@ -35,12 +37,5 @@
         }
     }
     
-    //UsersController::construct_if_not_exists();
-    
-    if(isset($_GET["action"]))
-    {
-        $users_controller = new UsersController();
-        $action = $_GET["action"];
-        $users_controller->$action();
-    }
+    UsersController::process_request();
 ?>

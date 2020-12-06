@@ -1,2 +1,4 @@
 *.sql
+*dbconnect.php
+news/dbconnect.php
 

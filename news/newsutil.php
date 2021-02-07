@@ -36,13 +36,13 @@ function deletePost() {
 }
 
 function currentlyEditing() {
-    // if ($GLOBALS["postid"] !== "") {
-    //     echo "<h3>Currently Editing Post id: " . $GLOBALS["postid"] . "</h3>";
-    // } else if ($GLOBALS["posttext"]) {
-    //     echo "<h3>New Post Created!</h3>";
-    // } else {
-    //     echo "<h3>New News Story</h3>";
-    // }
+    if ($GLOBALS["postid"] !== "") {
+        echo "<h3>Currently Editing Post id: " . $GLOBALS["postid"] . "</h3>";
+    } else if ($GLOBALS["posttext"]) {
+        echo "<h3>New Post Created!</h3>";
+    } else {
+        echo "<h3>New News Story</h3>";
+    }
 }
 
 function isUpdate() {
@@ -62,11 +62,10 @@ function processParams() {
             if (is_int($postid = filter_input(INPUT_POST, 'postid', FILTER_VALIDATE_INT))) {
                 //update existing post
                 $sql = "UPDATE posts SET title='" . $_POST["title"] . "', posttext='" . $_POST["posttext"] . "' WHERE id=" . $_POST["postid"];
-                // die($blah . $_POST["title"] . "      " . $_POST["posttext"]);
                 
                 $res = $mysqli->query($sql);
                 
-
+                // TODO: adapt all queries to prepared statements
                 // $stmt = $mysqli->prepare("UPDATE  SET `field1` = 1 WHERE `key` = (?)")
                 // $stmt->bind_param("s", $mykey);
                 // $stmt->execute();
@@ -74,8 +73,6 @@ function processParams() {
                 // $nrows = $stmt->affected_rows;
                 // if (!$nrows) {
                 // }
-
-                // die("failed to update post");
                 
                 $GLOBALS["postid"]   = $_POST["postid"];
                 $GLOBALS["title"]    = $_POST["title"];
@@ -113,14 +110,12 @@ function processParams() {
             die("failed to load text for editing");
         }
     } else {
-        echo "<h1>HORRIE</h1>";
-        // $GLOBALS["title"] = "";
+        $GLOBALS["title"] = "";
     }
 }
 
 function newsPostText() {
     if (isset($GLOBALS["posttext"]))
-    echo "horrie";
     echo $GLOBALS["posttext"];
 }
 
@@ -131,7 +126,6 @@ function newsPostId() {
 function titleText() {
     if (isset($GLOBALS["title"])) 
         echo $GLOBALS["title"];
-    else echo "horrie!";
 }
 
 function printArchiveBar() {

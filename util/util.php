@@ -135,6 +135,8 @@ function printNews() {
 
 function printCategories() {
     $categories = '<ul>' .
+                    '<li><a href="https://spencerbartz.com/horrieinternational/camerons_corner/index.php">Cameron\'s Corner</a></li>' .
+                    '<li><a href="http://spencerbartz.com/horrieinternational/garys_corner/index.php">Gary\'s Corner</a></li>' .
                     '<li><a href="https://en.wikipedia.org/wiki/Weltpolitik">World Politik</a></li>' .
                     '<li><a href="https://en.wikipedia.org/wiki/Sport_in_Germany">Sport Europa</a></li>' .
                     '<li><a href="networking/networking.php">Networking</a></li>' .

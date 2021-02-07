@@ -1,4 +1,9 @@
 *.sql
 *dbconnect.php
 news/dbconnect.php
+*.gif
+*.jpg
+*.jpeg
+*.JPG
+*.jpg
 

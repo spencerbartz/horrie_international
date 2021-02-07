@@ -5,7 +5,7 @@ $posttext = "";
 
 function printNewsLinks() {
     include 'dbconnect.php';
-    $res = $mysqli->query("select id, dateposted, substring(posttext, 1, 256) as preview from posts");
+    $res = $mysqli->query("SELECT id, dateposted, substring(posttext, 1, 256) AS preview FROM posts");
 
     if (!$res) {
         return false;
@@ -36,12 +36,20 @@ function deletePost() {
 }
 
 function currentlyEditing() {
-    if ($GLOBALS["postid"] !== "") {
-        echo "<h3>Currently Editing Post id: " . $GLOBALS["postid"] . "</h3>";
-    } else if ($GLOBALS["posttext"]) {
-        echo "<h3>New Post Created!</h3>";
+    // if ($GLOBALS["postid"] !== "") {
+    //     echo "<h3>Currently Editing Post id: " . $GLOBALS["postid"] . "</h3>";
+    // } else if ($GLOBALS["posttext"]) {
+    //     echo "<h3>New Post Created!</h3>";
+    // } else {
+    //     echo "<h3>New News Story</h3>";
+    // }
+}
+
+function isUpdate() {
+    if ($GLOBALS["postid"] === "") {
+        return 'false';
     } else {
-        echo "<h3>New News Story</h3>";
+        return 'true';
     }
 }
 
@@ -53,26 +61,39 @@ function processParams() {
         if (isset($_POST["postid"])) {
             if (is_int($postid = filter_input(INPUT_POST, 'postid', FILTER_VALIDATE_INT))) {
                 //update existing post
-                $sql = "update posts set dateposted=dateposted, posttext='" . $_POST["posttext"] . "' where id=" . $_POST["postid"];
+                $sql = "UPDATE posts SET title='" . $_POST["title"] . "', posttext='" . $_POST["posttext"] . "' WHERE id=" . $_POST["postid"];
+                // die($blah . $_POST["title"] . "      " . $_POST["posttext"]);
+                
                 $res = $mysqli->query($sql);
+                
 
-                if ($res) {
-                    $GLOBALS["posttext"] = $_POST["posttext"];
-                    $GLOBALS["postid"] = $_POST["postid"];
-                } else {
-                    die("failed to update post");
-                }
+                // $stmt = $mysqli->prepare("UPDATE  SET `field1` = 1 WHERE `key` = (?)")
+                // $stmt->bind_param("s", $mykey);
+                // $stmt->execute();
+
+                // $nrows = $stmt->affected_rows;
+                // if (!$nrows) {
+                // }
+
+                // die("failed to update post");
+                
+                $GLOBALS["postid"]   = $_POST["postid"];
+                $GLOBALS["title"]    = $_POST["title"];
+                $GLOBALS["posttext"] = $_POST["posttext"];
+                
             } else {
                 //insert new post
-                $sql = "insert into posts values(NULL, '" . $_POST["posttext"] . "', NOW(), '')";
+                $sql = "INSERT INTO posts VALUES (NULL, '" . $_POST["title"] . "', '" . $_POST["posttext"] . "', NOW(), '')";
                 $res = $mysqli->query($sql);
 
                 if ($res) {
-                    $GLOBALS["posttext"] =  $_POST["posttext"];
-                    $sql = "select max(id) as postid from posts";
+                    
+                    $sql = "SELECT MAX(id) AS postid FROM posts"; // Select the post we just inserted
                     $res = $mysqli->query($sql);
                     $row = $res->fetch_assoc();
                     $GLOBALS["postid"] = $row["postid"];
+                    $GLOBALS["title"]  = $_POST["title"];
+                    $GLOBALS["posttext"] = $_POST["posttext"];
                 } else {
                     die("failed to insert post");
                 }
@@ -80,25 +101,37 @@ function processParams() {
         }
     } else if (isset($_GET["postid"])) {
         //edit existing post
-        $sql = "select id, posttext from posts where id=" . $_GET["postid"];
+        $sql = "SELECT id, title, posttext FROM posts WHERE id=" . $_GET["postid"];
         $res = $mysqli->query($sql);
 
         if ($res) {
             $row = $res->fetch_assoc();
-            $GLOBALS["posttext"] =  $row["posttext"];
-            $GLOBALS["postid"] = $row["id"];
+            $GLOBALS["postid"]   = $row["id"];
+            $GLOBALS["title"]    = isset($row["title"]) ? $row["title"] : "";
+            $GLOBALS["posttext"] = $row["posttext"];
         } else {
             die("failed to load text for editing");
         }
+    } else {
+        echo "<h1>HORRIE</h1>";
+        // $GLOBALS["title"] = "";
     }
 }
 
 function newsPostText() {
+    if (isset($GLOBALS["posttext"]))
+    echo "horrie";
     echo $GLOBALS["posttext"];
 }
 
 function newsPostId() {
     echo $GLOBALS["postid"];
+}
+
+function titleText() {
+    if (isset($GLOBALS["title"])) 
+        echo $GLOBALS["title"];
+    else echo "horrie!";
 }
 
 function printArchiveBar() {

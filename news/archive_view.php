@@ -8,7 +8,7 @@
     <?php printHeader($siteRootPath); ?>
     <div class="left rounded">     
         <div class="head-container">
-            <h2 class="centered">Official Horrie International News Archives</h2>
+            <h2 class="center-text">Official Horrie International News Archives</h2>
             
             <div class="box rounded center-text"><h2>News from <?php echo date("F, Y", mktime(0, 0, 0, 0, $_REQUEST["month"], $_REQUEST["year"])); ?></h2></div>
         </div>

@@ -188,13 +188,17 @@ function deleteWarning(postid)
     }
 }
 
-function validateTextAreaInput(textAreaId)
+function validateTextAreaInput(textAreaId, editing)
 {
     var textArea = _el(textAreaId);
     if(CKEDITOR.instances.posttext.getData().length > 0)
     {
-        //validate html tags etc
-        alert("Creating new news story!");
+        if (editing) {
+            alert("Updating news story!");        
+        } else {
+            alert("Creating new news story!");
+        }
+
         return true;
     }
     else

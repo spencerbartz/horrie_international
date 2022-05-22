@@ -8,15 +8,19 @@
     <?php printHeader($siteRootPath); ?>
     <div class="left rounded">     
         <div class="head-container">
-            <h2><a href="#">Horrie International News Archives</a></h2>
+            <h2 class="center-text">Official Horrie International News Archives</h2>
             
-            <div class="box rounded center-text"><h2>Archived news from <?php echo date("F, Y", mktime(0, 0, 0, 0, $_REQUEST["month"], $_REQUEST["year"])); ?></h2></div>
-            <div class="archives">
-            <?php if(isset($_REQUEST["year"]) && isset($_REQUEST["month"])) {
-                    printArchivesForDate($_REQUEST["year"], $_REQUEST["month"]);
-                } ?>
-            </div>
+            <div class="box rounded center-text"><h2>News from <?php echo date("F, Y", mktime(0, 0, 0, 0, $_REQUEST["month"], $_REQUEST["year"])); ?></h2></div>
         </div>
+
+        <div class="archives">
+            <?php 
+                if(isset($_REQUEST["year"]) && isset($_REQUEST["month"])) {
+                    printArchivesForDate($_REQUEST["year"], $_REQUEST["month"]);
+                } 
+            ?>
+        </div>
+
     </div>
     
     <div id="right-bar" class="right rounded"> 

@@ -23,7 +23,8 @@
         $langCode = $_GET['langCode'] ;
     
         // Check the $_FILES array and save the file. Assign the correct path to a variable ($url).
-        $url = "http://horrieinternational.com/news/uploads/" . $fileName;
+        $url = "http://spencerbartz.com/horrieinternational/news/uploads/" . $fileName;
+        // $url = "localhost/horrieinternational/news/uploads/" . $fileName;
         // Usually you will only assign something here if the file could not be uploaded.
         $message = "File uploaded successfully!";
         echo "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction($funcNum, '$url', '$message');</script>";

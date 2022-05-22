@@ -1,7 +1,6 @@
 <?php
 
-function printPageDeclaration($siteRootPath)
-{
+function printPageDeclaration($siteRootPath) {
     //declare HTML page
     println('<!doctype html>');
     println('<head>');
@@ -26,8 +25,7 @@ function printPageDeclaration($siteRootPath)
     println('<script type="text/javascript" src="' . $siteRootPath . 'util/js/util.js"></script>');
 }
 
-function printHeader($siteRootPath)
-{
+function printHeader($siteRootPath) {
     println('<div id="header" class="header rounded">' );
     println('<img src="' . $siteRootPath . 'img/mainlogo.jpg" class="rounded" />');
     println('<div class="mainheader"><h2>What have you done for us lately?</h2></div>');
@@ -41,31 +39,30 @@ function printHeader($siteRootPath)
     println('</div>');
 }
 
-function printNewsArchives()
-{
+function printNewsArchives() {
     include "news/dbconnect.php";
 
     $sql = "SELECT * FROM posts ORDER BY dateposted DESC";
     $res = $mysqli->query($sql);
     
-    if(!$res)
-        die($mysqli->error);
+    if (!$res) {
+        echo $mysqli->error;
+    }
     
-    if($res->num_rows == 0)
-        println("table was empty?!");    
- 
+    if ($res->num_rows == 0) {
+        println("table was empty");    
+    }
+
     $years = Array();   
     $months = Array();
     $year = "";
     $month = "";
     
-    while($row = $res->fetch_assoc())
-    {
+    while($row = $res->fetch_assoc()) {
         $dateposted = $row["dateposted"];
         $year = date("Y",  strtotime($dateposted));
         
-        if(end($years) !== $year)    
-        {
+        if (end($years) !== $year) {
             array_push($years, $year);
             println("</ul>" . $year  . "<ul>");
         }
@@ -73,23 +70,20 @@ function printNewsArchives()
         $month = date("F",  strtotime($dateposted));
         $month_num = date("m",  strtotime($dateposted));
         
-        if(end($months) !== $month)
-        {
+        if (end($months) !== $month) {
             array_push($months, $month);
             println("<li><a href=\"news/archive_view.php?datetime=" . $dateposted . "&year=" . $year . "&month=" . $month_num . "\">" . $month . "</a></li>");    
         }   
     }
 }
 
-function printArchivesForDate($year, $month)
-{
+function printArchivesForDate($year, $month) {
     include "../news/dbconnect.php";
     $sql = "SELECT id, posttext, hashtags, dateposted FROM posts WHERE YEAR(dateposted) =" . $year . " AND MONTH(dateposted) = ". $month . " ORDER BY dateposted DESC";
 
     $res = $mysqli->query($sql);
     
-    if(!$res)
-    {
+    if (!$res) {
         println('<div class="box rounded">');
         println('<span class="white"> Sorry, there was an error. Please try again later.</span>');
         println("DB ERROR BUDDY " . $mysqli->error);
@@ -97,51 +91,41 @@ function printArchivesForDate($year, $month)
         return;
     }
     
-    if($res->num_rows > 0)
-    {
-        while($row = $res->fetch_assoc())   
-        {
+    if ($res->num_rows > 0) {
+        while($row = $res->fetch_assoc()) {
             println('<div class="box rounded">');
             println('<h1 class="news-story-title">Archived News: ' . date('F jS, Y', strtotime($row['dateposted'])) . '</h1>');
             println('<p class="box-content">' . $row['posttext'] . '</p>');
             println('<p class="post-footer align-right"> <span class="date">Date Posted: ' . $row['dateposted'] . '</span> </p>');
             println('</div>');
         }
-    }
-    else
-    {
+    } else {
         println('<div class="box rounded">');
         println('<span class="white"> Sorry, there were no posts in this category   . Please try again later.</span>');
         println('</div>');        
     }
 }
 
-function printNews()
-{
+function printNews() {
     include "news/dbconnect.php";
     $sql = "SELECT posttext, hashtags, dateposted FROM posts ORDER BY dateposted DESC LIMIT 3";
     
     $res = $mysqli->query($sql);
-    if(!$res)
-    {
+    if (!$res) {
         println('<div class="box rounded">');
         println('<span class="white"> Sorry, Horrie International news is not available right now. Please try again later.</span>');
         println('</div>');
     }
     
-    if($res->num_rows > 0)
-    {
-        while($row = $res->fetch_assoc())   
-        {
+    if ($res->num_rows > 0) {
+        while($row = $res->fetch_assoc()) {
             println('<div class="box rounded">');
             println('<h1 class="news-story-title">Latest News: ' . date('F jS, Y', strtotime($row['dateposted'])) . '</h1>');
             println('<p class="box-content">' . $row['posttext'] . '</p>');
             println('<p class="post-footer align-right"> <span class="date">Date Posted: ' . $row['dateposted'] . '</span> </p>');
             println('</div>');
         }
-    }
-    else
-    {
+    } else {
         println('<div class="box rounded">');
         println('<h1><span class="white">There are no news stories yet.</span></h1>');
         println('</div>');
@@ -149,9 +133,10 @@ function printNews()
 }
 
 
-function printCategories()
-{
+function printCategories() {
     $categories = '<ul>' .
+                    '<li><a href="https://spencerbartz.com/horrieinternational/camerons_corner/index.php">Cameron\'s Corner</a></li>' .
+                    '<li><a href="http://spencerbartz.com/horrieinternational/garys_corner/index.php">Gary\'s Corner</a></li>' .
                     '<li><a href="https://en.wikipedia.org/wiki/Weltpolitik">World Politik</a></li>' .
                     '<li><a href="https://en.wikipedia.org/wiki/Sport_in_Germany">Sport Europa</a></li>' .
                     '<li><a href="networking/networking.php">Networking</a></li>' .
@@ -163,21 +148,18 @@ function printCategories()
     println($categories);
 }
 
-function getPathToRootDir($fileName)
-{
+function getPathToRootDir($fileName) {
     $parts = explode("\\", $fileName);
             
     //Check for file system that uses / instead of \
-    if(count($parts) == 1)
-    {
+    if (count($parts) == 1) {
         $parts = explode("/", $fileName);
     }
     
     //Trick to figure out path to css and js util files.
     $path = "";
-    for($i = count($parts) - 2; $i > 0; $i--)
-    {
-        if($parts[$i] === "horrieinternational" || $parts[$i] === "ipg.horrieinternationalc")
+    for($i = count($parts) - 2; $i > 0; $i--) {
+        if ($parts[$i] === "horrieinternational" || $parts[$i] === "ipg.horrieinternationalc")
             break;
         else 
             $path = "../" . $path;
@@ -186,33 +168,29 @@ function getPathToRootDir($fileName)
     return $path;
 }
 
-function printFooter($siteRootPath)
-{
+function printFooter($siteRootPath) {
         println('<img src="' . $siteRootPath . 'img/footerlogo.jpg" />');
         println("", TRUE);
         println('All rights reserved. &copy; Philipp Hein 2016');
 }
 
-function println($text, $webmode = FALSE)
-{
-    if($webmode)
+function println($text, $webmode = FALSE) {
+    if ($webmode) {
         echo $text . "<br/>";
-    else
-	echo $text . PHP_EOL;	
+    } else {
+        echo $text . PHP_EOL;
+    }	
 }
 
-function alert($msg)
-{
+function alert($msg) {
     echo '<script type="text/javascript">alert("' . $msg . '");</script>';
 }
 
-function console_log($msg)
-{
+function console_log($msg) {
     echo '<script type="text/javascript">console.log(' . $msg . ');</script>';  
 }
 
-function convertToSnakeCase($string)
-{
+function convertToSnakeCase($string) {
     $string = preg_replace("([A-Z]+)",   "_$0", $string, 5);
     return substr(strtolower($string), 1, strlen($string));
 }

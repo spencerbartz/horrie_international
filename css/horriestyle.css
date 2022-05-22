@@ -37,11 +37,13 @@ a {
     color: #97C4FF; text-decoration: none;
 }
 
+/* Wrapper for main content */
 #wrap {
     margin: 20px auto 0 auto;
-    width: 800px;
+    width: 1100px;
 }
 
+/* Header and descendent tag styles (width autosizes to #wrap's width) */
 .header { 
     border: 5px solid #222;
     background: #333;
@@ -76,9 +78,10 @@ a {
     line-height: 12px;
 }
 
+/* Left section for main content */
 .left {
     margin-top: 10px;
-    width: 570px;
+    width: 840px;
     float: left;
     text-align: justify;
     border: 5px solid #222;
@@ -88,15 +91,16 @@ a {
 
 .left h2 {
     color: #FF4800;
-    font-size: 24px;
-    letter-spacing: -3px;
-    font-weight: 100;
+    /*font-size: 24px;*/
+    /*letter-spacing: -3px;*/
+    /*font-weight: 100;*/
     padding : 10px 0 15px 0;
 }
 
+/* Right section for additional navigation */
 .right {
     margin-top: 10px;
-    width: 160px;
+    width: 190px;
     float: right;
     border: 5px solid #222;
     font-size: 12px;

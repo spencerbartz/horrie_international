@@ -22,8 +22,11 @@
             <?php deletePost(); ?>
             <p>  
             <script src="../ckeditor/ckeditor.js"></script>
-            <form action="newsadmin.php" method="post" onsubmit="return validateTextAreaInput('posttext');">
+            <form action="newsadmin.php" method="post" onsubmit="return validateTextAreaInput('posttext', <?php echo isUpdate(); ?>);">
                 <div>
+                <br />
+                <label for="title"><h3>Title</h3></label>
+                <input type="text" id="title" name="title" value="<?php titleText(); ?>"><br /><br />
                     <textarea id="posttext" class="posttext rounded" name="posttext"><?php newsPostText(); ?></textarea><br />
                     <script>
                         CKEDITOR.replace('posttext', {filebrowserBrowseUrl: 'filebrowser.php', filebrowserUploadUrl: 'fileupload.php'});

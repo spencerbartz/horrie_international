@@ -1,6 +1,5 @@
 *.sql
-*dbconnect.php
-news/dbconnect.php
+config.json
 *.gif
 *.jpg
 *.jpeg

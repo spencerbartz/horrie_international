@@ -171,7 +171,7 @@ function getPathToRootDir($fileName) {
 function printFooter($siteRootPath) {
         println('<img src="' . $siteRootPath . 'img/footerlogo.jpg" />');
         println("", TRUE);
-        println('All rights reserved. &copy; Philipp Hein 2016');
+        println('All rights reserved. &copy; Philipp Hein ' . date('Y'));
 }
 
 function println($text, $webmode = FALSE) {

@@ -1,8 +1,9 @@
 *.sql
 config.json
+vendor
 *.gif
 *.jpg
 *.jpeg
 *.JPG
 *.jpg
-
+composer.*

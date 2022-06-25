@@ -1,5 +1,6 @@
 <?php 
-    include 'util/util.php';
+    require 'util/util.php';
+    require 'util/config.php';
     $siteRootPath = getPathToRootDir(__FILE__);
     printPageDeclaration($siteRootPath);
 ?>
